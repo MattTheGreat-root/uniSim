@@ -5,12 +5,11 @@ import java.util.ArrayList;
 public class Course {
     public int courseID;
     public String title;
-    public static ArrayList<Course> courseList;
+    public static ArrayList<Course> courseList = new ArrayList<Course>();
     public int units;
     public Course(String title, int units) {
         this.title = title;
         this.units = units;
-        courseList = new ArrayList<Course>();
         courseList.add(this);
         this.courseID = courseList.size();
     }

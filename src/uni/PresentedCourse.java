@@ -4,18 +4,16 @@ import java.util.ArrayList;
 
 public class PresentedCourse {
     public int presentedCourseID;
-    public static ArrayList<PresentedCourse> presentedCourseList;
+    public static ArrayList<PresentedCourse> presentedCourseList = new ArrayList<PresentedCourse>();
     public int courseID;
     public int professorID;
     public int capacity;
-    public ArrayList<Integer> studentIDs;
+    public ArrayList<Integer> studentIDs = new ArrayList<Integer>();
 
     public PresentedCourse(int courseID, int professorID, int capacity) {
         this.courseID = courseID;
         this.professorID = professorID;
         this.capacity = capacity;
-        presentedCourseList = new ArrayList<PresentedCourse>(capacity);
-        studentIDs = new ArrayList<Integer>();
         presentedCourseList.add(this);
         presentedCourseID = presentedCourseList.size();
     }

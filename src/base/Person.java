@@ -5,12 +5,11 @@ public class Person {
    public int personID;
     public String name;
     public String nationalID;
-    public static ArrayList<Person> personList;
+    public static ArrayList<Person> personList = new ArrayList<Person>();
 
     public Person(String name, String nationalID) {
         this.name = name;
         this.nationalID = nationalID;
-        personList = new ArrayList<Person>();
         personList.add(this);
         this.personID = personList.size();
     }
