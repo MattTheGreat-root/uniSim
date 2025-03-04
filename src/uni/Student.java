@@ -3,20 +3,19 @@ import java.util.ArrayList;
 
 public class Student {
     public int studentID;
-    public static ArrayList<Student> students;
-    public int personID; //Person object id
+    public static ArrayList<Student> students = new ArrayList<Student>();
+    public int personID;
     public final int entranceYear;
-    public int majorID; //Major object id
+    public int majorID;
     public String studentCode;
 
     public Student(int personID, int entranceYear, int majorID) {
         this.personID = personID;
         this.entranceYear = entranceYear;
         this.majorID = majorID;
-        students = new ArrayList<Student>();
         students.add(this);
         this.studentID = students.size();
-        //Major m = Major.findById(majorID);
+
         if (Major.findById(majorID) != null) {
             Major.findById(majorID).addStudent();
         }
@@ -37,7 +36,16 @@ public class Student {
     }
 
     public void setStudentCode(){
-        this.studentCode = String.valueOf(entranceYear) + String.valueOf(majorID) + String.valueOf(Major.findById(majorID));
+        String temp = String.valueOf(entranceYear);
+        if (majorID < 10){
+            temp += "0";
+        }
+        temp += String.valueOf(majorID);
+        if (Major.findById(majorID).numberOfStudents < 10){
+            temp += "0";
+        }
+        temp += String.valueOf(Major.findById(majorID).numberOfStudents);
+        this.studentCode = temp;
     }
 
 }

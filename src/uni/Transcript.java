@@ -3,17 +3,17 @@ import java.util.HashMap;
 
 public class Transcript {
     public int studentID;
-    public HashMap<Integer, Double> transcript;
+    //keys are the presentedCourseID and values are the grades
+    public HashMap<Integer, Double> transcript = new HashMap<>();
 
     public Transcript(int StudentID) {
         this.studentID = StudentID;
     }
 
     public void setGrade(int presentedCourseID, double grade) {
-        PresentedCourse presentedCourse = PresentedCourse.findByID(presentedCourseID);
         boolean exists = false;
-        if (presentedCourse != null) {
-            exists = presentedCourse.studentIDs.contains(this.studentID);
+        if (PresentedCourse.findByID(presentedCourseID) != null) {
+            exists = PresentedCourse.findByID(presentedCourseID).studentIDs.contains(this.studentID);
         }
         else {
             System.out.println("Course " + presentedCourseID + " does not exist");
@@ -35,7 +35,13 @@ public class Transcript {
         }
     }
 
-//    public double getGPA(){
-//
-//    }
+    public double getGPA(){
+        int numberOfUnits = 0;
+        double soorat=0;
+        for (Integer i : transcript.keySet()) {
+            numberOfUnits += Course.findById(PresentedCourse.findByID(i).courseID).units;
+            soorat += Course.findById(PresentedCourse.findByID(i).courseID).units * transcript.get(i);
+        }
+        return soorat/numberOfUnits;
+    }
 }

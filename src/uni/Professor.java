@@ -4,15 +4,15 @@ import java.util.ArrayList;
 
 public class Professor {
     public int professorID;
-    public static ArrayList<Professor> professorList;
+    public static ArrayList<Professor> professorList = new ArrayList<Professor>();
     public int personID;
     public int majorID;
 
     public Professor(int personID, int majorID) {
         this.personID = personID;
         this.majorID = majorID;
-        professorList = new ArrayList<Professor>();
         professorList.add(this);
+        this.professorID = professorList.size();
     }
 
     public static Professor findByID(int professorID) {
