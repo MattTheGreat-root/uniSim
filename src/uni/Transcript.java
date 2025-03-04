@@ -27,11 +27,16 @@ public class Transcript {
     }
 
     public void printTranscript() {
-        //null pointer should be handled
         for (Integer i : transcript.keySet()) {
-            String name = Course.findById(PresentedCourse.findByID(i).courseID).title;
-            double grade = transcript.get(i);
-            System.out.println(name + " : " + grade);
+            if (Course.findById(PresentedCourse.findByID(i).courseID) != null) {
+                String name = Course.findById(PresentedCourse.findByID(i).courseID).title;
+                double grade = transcript.get(i);
+                System.out.println(name + " : " + grade);
+            }
+            else {
+                System.out.println("Course " + PresentedCourse.findByID(i).courseID + " does not exist");
+            }
+
         }
     }
 
@@ -39,8 +44,13 @@ public class Transcript {
         int numberOfUnits = 0;
         double soorat=0;
         for (Integer i : transcript.keySet()) {
-            numberOfUnits += Course.findById(PresentedCourse.findByID(i).courseID).units;
-            soorat += Course.findById(PresentedCourse.findByID(i).courseID).units * transcript.get(i);
+            if (Course.findById(PresentedCourse.findByID(i).courseID) != null){
+                numberOfUnits += Course.findById(PresentedCourse.findByID(i).courseID).units;
+                soorat += Course.findById(PresentedCourse.findByID(i).courseID).units * transcript.get(i);
+            }
+            else {
+                System.out.println("Course " + PresentedCourse.findByID(i).courseID + " does not exist");
+            }
         }
         return soorat/numberOfUnits;
     }

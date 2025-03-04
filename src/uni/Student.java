@@ -41,10 +41,15 @@ public class Student {
             temp += "0";
         }
         temp += String.valueOf(majorID);
-        if (Major.findById(majorID).numberOfStudents < 10){
+        if (Major.findById(majorID).numberOfStudents < 10 && Major.findById(majorID) != null) {
             temp += "0";
         }
-        temp += String.valueOf(Major.findById(majorID).numberOfStudents);
+        if (Major.findById(majorID) != null){
+            temp += String.valueOf(Major.findById(majorID).numberOfStudents);
+        }
+        else {
+            System.out.println("No major found with this ID");
+        }
         this.studentCode = temp;
     }
 
